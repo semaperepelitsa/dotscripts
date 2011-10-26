@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+
+gem_path=`gem-path "$1"`
+
+if [ $? -eq 0 ]; then
+  $EDITOR "$gem_path"
+else
+  echo $gem_path
+  exit 1
+fi

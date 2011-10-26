@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+
+gem="$1"
+
+info=`gem list -d "$gem" | grep "Installed at"`
+
+if [ -z "$info" ]; then
+  echo "There is no gem $gem installed"
+  exit 1
+fi
+
+version=`echo $info | awk '{print $3}' | sed "s/[():]//g"`
+path=`echo $info | awk '{print $4}'`
+
+gem_path="$path/gems/$gem-$version"
+
+if [ ! -d "$gem_path" ]; then
+  echo "Warning: this is not a directory"
+fi
+
+echo $gem_path

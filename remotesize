@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+url="$1"
+
+function size {
+  curl -sI $url | awk '/Content-Length/ { print $2 }'
+}
+
+size
